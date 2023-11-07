@@ -13,7 +13,6 @@ from gcp_storage_emulator.storage import Storage
 DEFAULT_PORT = int(os.environ.get("PORT", 9023))
 DEFAULT_HOST = os.environ.get("HOST", "localhost")
 
-
 def get_server(host, port, memory=False, default_bucket=None, data_dir=None):
     server = create_server(host, port, memory, default_bucket, data_dir=data_dir)
     return server
