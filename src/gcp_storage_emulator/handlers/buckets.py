@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime, timezone
 from http import HTTPStatus
+import os
 
 from gcp_storage_emulator import settings
 from gcp_storage_emulator.exceptions import Conflict, NotFound
@@ -38,7 +39,7 @@ def _make_bucket_resource(bucket_name):
         "kind": "storage#bucket",
         "id": bucket_name,
         "selfLink": "{}/b/{}".format(settings.API_ENDPOINT, bucket_name),
-        "projectNumber": "1234",
+        "projectNumber": os.environ["PROJECT_ID"],
         "name": bucket_name,
         "timeCreated": now,
         "updated": now,

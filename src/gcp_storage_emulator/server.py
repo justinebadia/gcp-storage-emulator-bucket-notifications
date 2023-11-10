@@ -1,6 +1,7 @@
 import gzip
 import json
 import logging
+import os
 import re
 import threading
 import time
@@ -216,12 +217,12 @@ class Request(object):
         self._request_handler = request_handler
         self._server_address = request_handler.server.server_address
         self._base_url = "http://{}:{}".format(
-            self._server_address[0], self._server_address[1]
+            os.environ["HOST"], os.environ["PORT"]
         )
         self._full_url = self._base_url + self._path
         self._parsed_url = urlparse(self._full_url)
         self._query = parse_qs(self._parsed_url.query)
-        self._methtod = method
+        self._method = method
         self._data = None
         self._parsed_params = None
 
@@ -239,7 +240,7 @@ class Request(object):
 
     @property
     def method(self):
-        return self._methtod
+        return self._method
 
     @property
     def query(self):
